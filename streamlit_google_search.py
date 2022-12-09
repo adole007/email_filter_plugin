@@ -5,6 +5,13 @@ from pygame import mixer
 import speech_recognition as sr
 import webbrowser
 
+
+from transformers import AutoModelWithLMHead, AutoTokenizer
+
+# Load the pre-trained NLP model and tokenizer
+model = AutoModelWithLMHead.from_pretrained("bert-base-uncased")
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
 # Set up the recognition object
 r = sr.Recognizer()
 
@@ -26,6 +33,15 @@ def voice_search():
       mixer.init()
       mixer.music.load(error_message)
       mixer.music.play()
+ 
+# Define a function that processes the user's input and provides a response
+def process_input(input_text):
+  # Tokenize the input text
+  input_tokens = tokenizer.tokenize(input_text)
+
+  # Use the pre-trained NLP model to generate a response
+  response_tokens = model.generate(input_tokens, max_length=64, do_sample=True)
+
 
 # Define a function that handles the text input
 def text_input():
