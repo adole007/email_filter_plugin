@@ -1,3 +1,11 @@
+"""This code uses several libraries to implement a voice search feature. When the voice_search() function is called, it listens for the user's voice input using a microphone, and then tries to recognize the input and convert it to text using the recognize_google() method from the speech_recognition library.
+
+If the recognition is successful, the voice_search() function opens a new tab in the default web browser and performs a search for the specified text using the webbrowser.open_new_tab() method. If the recognition fails, the function plays an error message using the gTTS and mixer libraries.
+
+The process_input() function tokenizes the user's input using the AutoTokenizer class from the transformers library, and then uses the pre-trained AutoModelWithLMHead class to generate a response to the user's input.
+
+The text_input() function simply gets the user's input using a text input field, and then opens a new tab in the default web browser to search for the specified text."""
+
 # Import necessary libraries
 import streamlit as st
 from gtts import gTTS
